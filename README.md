@@ -86,3 +86,36 @@ export APP_ENV=local  # 또는 dev / prd
 export APP_ENV=local
 uvicorn BE.core.app:create_app --factory --host 0.0.0.0 --port 8000
 ```
+
+---
+
+## 4) SSE 이벤트 포맷 (Streaming)
+
+스트리밍 응답은 다음 형식을 따릅니다. (`/chat`에서 `stream=true` 사용)
+
+### 4.1 Step 이벤트
+```json
+{
+  "type": "step",
+  "step": "generate_answer",
+  "status": "start",
+  "detail": {}
+}
+```
+
+### 4.2 Token 이벤트
+```json
+{
+  "type": "token",
+  "token": "hello"
+}
+```
+
+### 4.3 Final 이벤트
+```json
+{
+  "type": "final",
+  "answer": "최종 응답",
+  "metadata": {}
+}
+```

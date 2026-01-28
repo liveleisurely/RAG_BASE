@@ -42,6 +42,10 @@ async def orchestrator_stream(
                 output = event.get("data", {}).get("output") or event.get("data", {}).get("outputs")
                 if isinstance(output, dict) and "answer" in output:
                     final_answer = output["answer"]
+                if isinstance(output, dict) and output.get("tokens"):
+                    for token in output["tokens"]:
+                        notify_token(handlers, str(token), state)
+                        yield TokenEvent(token=str(token))
                 yield StepEvent(step=name, status="done")
                 continue
             if event_type == "on_chain_error":
