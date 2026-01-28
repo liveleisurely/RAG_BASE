@@ -1,0 +1,6 @@
+fastapi==0.110.0
+uvicorn==0.29.0
+pydantic==2.6.4
+langgraph==0.0.40
+sqlalchemy==2.0.28
+langchain-core==0.2.38
